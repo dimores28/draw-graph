@@ -3,9 +3,10 @@
 
 <head>
   <title>Graph</title>
+  <link rel="stylesheet" href="fonts/stylesheet.css">
   <style>
     html {
-      background-color: #0B2E5E;
+      background-color: #0A2E5E;
     }
 
     .node {
@@ -32,13 +33,22 @@
       z-index: -2;
     }
 
+    .title {
+      font-size: 32px;
+      font-weight: 500;
+      font-family: Caladea, sans-serif;
+      color: #2F3B69;
+    }
+
     .content {
-      color: black;
+      color: #2F3B69;
+      font-family: Garet;
+      font-size: 21px;
+      font-weight: 400;
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      font-size: 24px;
     }
 
     .overlay {
@@ -74,13 +84,6 @@
 <body>
   <div id="graph"></div>
   
-
-  <div class="test">
-    <div id="start">start</div>
-    <div id="end">end</div>
-  </div>
-
-
   <script src="leader-line.min.js"></script>
   <script>
       async function makeRequest(id) {
@@ -88,6 +91,7 @@
 
         if (response.ok) { 
           let json = await response.json();
+          console.log(json);
           return json;
         } else {
           console.error("Ошибка HTTP: " + response.status);
@@ -125,6 +129,8 @@
         node.id = item.id;
         node.parent = item.parentPostId;
         node.location = getLocation(item.positiion);
+        node.title = item.title;
+        node.description = item.description;
 
         nodes.push(node);
       });
@@ -152,7 +158,8 @@
         div.style.left = x - nodeSize / 2 + 'px';
         div.style.top = y - nodeSize / 2 + 'px';
         div.innerHTML = `
-          <div class="content">№${node.id}</div>
+          <div class="title">${node.title}</div>
+          <div class="content">${node.description}</div>
           <svg class="overlay" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512 403">
             <path
               fill="grey"
@@ -195,7 +202,7 @@
           let angle = (Math.atan2(location.dy, location.dx) * 180) / Math.PI;
           line.style.width = length + 'px';
           line.style.transform = `rotate(${angle}deg)`;
-          graph.appendChild(line);
+          // graph.appendChild(line);
 
           drawNode(childX, childY, child);
         });
@@ -221,18 +228,6 @@
 
 
     })();
-
-
-    // Add new leader line from `start` to `end` (HTML/SVG element, basically).
-    new LeaderLine(
-      document.getElementById('start'),
-      document.getElementById('end'),
-      {
-        color: 'white', 
-        size: 4, 
-        endPlug: 'arrow1',
-      }
-    );
   </script>
 </body>
 

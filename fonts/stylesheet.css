@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Garet';
+    src: url('Garet-Book.woff2') format('woff2'),
+        url('Garet-Book.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Garet';
+    src: url('Garet-Book.woff2') format('woff2'),
+        url('Garet-Book.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Caladea';
+    src: url('Caladea-Bold.woff2') format('woff2'),
+        url('Caladea-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DO-AllCaps Slanted';
+    src: url('DO-AllCaps-Slanted.woff2') format('woff2'),
+        url('DO-AllCaps-Slanted.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
