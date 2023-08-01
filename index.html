@@ -25,7 +25,7 @@
       transform-origin: top left;
       height: 30px;
       z-index: 2;
-      background-image: url(./line.png);
+      background-image: url(./line.svg);
       background-size: 67% 100%;
       padding: 0 30px;
       background-repeat: no-repeat;
@@ -38,6 +38,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+      font-size: 24px;
     }
 
     .overlay {
@@ -48,11 +49,39 @@
       transform: translate(-40%, -50%);
       z-index: -1;
     }
+
+    .test {
+      display: flex;
+      gap: 160px;
+      margin-top: 60px;
+      margin-left: 50%;
+    }
+
+    #start {
+      width: 150px;
+      height: 150px;
+      border: 1px solid tomato;
+    }
+
+    #end {
+      width: 150px;
+      height: 150px;
+      border: 1px solid tomato;
+    }
   </style>
 </head>
 
 <body>
   <div id="graph"></div>
+  
+
+  <div class="test">
+    <div id="start">start</div>
+    <div id="end">end</div>
+  </div>
+
+
+  <script src="leader-line.min.js"></script>
   <script>
       async function makeRequest(id) {
         let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
@@ -84,6 +113,7 @@
     // ];
 
     const nodes = [];
+    let linkcs = [];
     let data = null;
     
     (async ()=> {
@@ -99,8 +129,6 @@
         nodes.push(node);
       });
       //------------------------//
-
-        
       const nodeMap = nodes.reduce((acc, node) => {
         acc[node.id] = node;
         node.children = [];
@@ -120,10 +148,11 @@
       function drawNode(x, y, node) {
         let div = document.createElement('div');
         div.className = 'node';
+        div.id = `nodeId${node.id}`;
         div.style.left = x - nodeSize / 2 + 'px';
         div.style.top = y - nodeSize / 2 + 'px';
         div.innerHTML = `
-          <div class="content">hello ${node.id}</div>
+          <div class="content">№${node.id}</div>
           <svg class="overlay" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512 403">
             <path
               fill="grey"
@@ -175,8 +204,35 @@
       const rootNode = nodes.find((node) => node.parent === null);
       drawNode(100, 100, rootNode);
 
+      console.log(nodes)
+      nodes.forEach(elem => {
+        if(elem.parent) {
+          new LeaderLine(
+            document.getElementById(`nodeId${elem.parent}`),
+            document.getElementById(`nodeId${elem.id}`),
+            {
+              color: 'white', 
+              size: 4, 
+              endPlug: 'arrow1',
+            }
+          );
+        }
+      });
+
+
     })();
 
+
+    // Add new leader line from `start` to `end` (HTML/SVG element, basically).
+    new LeaderLine(
+      document.getElementById('start'),
+      document.getElementById('end'),
+      {
+        color: 'white', 
+        size: 4, 
+        endPlug: 'arrow1',
+      }
+    );
   </script>
 </body>
 
