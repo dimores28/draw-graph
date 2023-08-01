@@ -9,8 +9,12 @@
       background-color: #0A2E5E;
     }
 
+    #graph {
+      overflow: hidden;
+    }
+
     .node {
-      position: absolute;
+      position: sticky;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -58,25 +62,6 @@
       top: 50%;
       transform: translate(-40%, -50%);
       z-index: -1;
-    }
-
-    .test {
-      display: flex;
-      gap: 160px;
-      margin-top: 60px;
-      margin-left: 50%;
-    }
-
-    #start {
-      width: 150px;
-      height: 150px;
-      border: 1px solid tomato;
-    }
-
-    #end {
-      width: 150px;
-      height: 150px;
-      border: 1px solid tomato;
     }
   </style>
 </head>
