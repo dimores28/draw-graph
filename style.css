@@ -2,8 +2,16 @@ html {
   background-color: #0a2e5e;
 }
 
+.wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 15px;
+  overflow: hidden;
+}
+
 #graph {
   overflow: hidden;
+  margin-left: 100px;
 }
 
 .node {
@@ -16,6 +24,10 @@ html {
   border-radius: 50%;
   line-height: 40px;
   text-align: center;
+}
+
+.start-node {
+  margin-bottom: 60px;
 }
 
 .line {
