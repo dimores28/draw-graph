@@ -1,0 +1,58 @@
+html {
+  background-color: #0a2e5e;
+}
+
+#graph {
+  overflow: hidden;
+}
+
+.node {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  line-height: 40px;
+  text-align: center;
+}
+
+.line {
+  position: absolute;
+  transform-origin: top left;
+  height: 30px;
+  z-index: 2;
+  background-image: url(./line.svg);
+  background-size: 67% 100%;
+  padding: 0 30px;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+  font-family: Caladea, sans-serif;
+  color: #2f3b69;
+}
+
+.content {
+  color: #2f3b69;
+  font-family: Garet;
+  font-size: 21px;
+  font-weight: 400;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  z-index: -1;
+}

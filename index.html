@@ -1,106 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Graph</title>
+    <link rel="stylesheet" href="fonts/stylesheet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <title>Graph</title>
-  <link rel="stylesheet" href="fonts/stylesheet.css">
-  <style>
-    html {
-      background-color: #0A2E5E;
-    }
-
-    .wrapper {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 15px;
-      overflow: hidden;
-    }
-    
-
-    #graph {
-      overflow: hidden;
-      position: relative;
-      margin-left: 100px;
-    }
-
-    .node {
-      position: sticky;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      line-height: 40px;
-      text-align: center;
-    }
-
-    .node-start {
-      margin-bottom: 40px;
-    }
-
-    .line {
-      position: absolute;
-      transform-origin: top left;
-      height: 30px;
-      z-index: 2;
-      background-image: url(./line.svg);
-      background-size: 67% 100%;
-      padding: 0 30px;
-      background-repeat: no-repeat;
-      z-index: -2;
-    }
-
-    .title {
-      font-size: 32px;
-      font-weight: 500;
-      font-family: Caladea, sans-serif;
-      color: #2F3B69;
-    }
-
-    .content {
-      color: #2F3B69;
-      font-family: Garet;
-      font-size: 21px;
-      font-weight: 400;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .overlay {
-      position: absolute;
-      width: 100%;
-      left: 50%;
-      top: 50%;
-      transform: translate(-40%, -50%);
-      z-index: -1;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrapper">
-    <div class="node node-start" id="start" style="left: 0px; top: 0px;">
-      <div class="content">Початок</div>
-      <svg class="overlay" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512 403">
-        <path fill="grey" d="M124.6 14.1c-35.4 5.6-60.8 18-80.1 39.1-6.3 6.9-13.1 18.7-18.5 32.3-8.7 22.1-15 58.7-15 87.5.1 16.5 2.3 42.7 4.3 50.1.8 3 2.9 11.3 4.6 18.5 5.8 24.5 9.9 36 20.2 56.9 17.1 34.8 42.5 58.9 74.5 71 8.2 3.1 23.3 7.2 33.4 9 20.5 3.8 65.7 6.7 113.5 7.2 37.6.5 41.5.3 67.5-3.8 15.6-2.4 37.7-10.4 52.9-19.1 34.2-19.6 60.4-51.9 86.7-106.3 25.7-53.4 34.2-95.4 26.9-133-8-40.7-31.2-69.1-65-79.6-15.7-4.8-28.6-6.6-56.5-7.9-12.4-.5-27-1.7-32.5-2.5S325.4 31.1 318 30c-7.4-1.1-23.2-3.8-35-6-25.6-4.8-57.9-9.5-74.5-10.9-6.6-.6-25.5-1-42-1-24.2.1-32.3.5-41.9 2z"></path>
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512 403">
-        <path fill="white" d="M124.6 14.1c-35.4 5.6-60.8 18-80.1 39.1-6.3 6.9-13.1 18.7-18.5 32.3-8.7 22.1-15 58.7-15 87.5.1 16.5 2.3 42.7 4.3 50.1.8 3 2.9 11.3 4.6 18.5 5.8 24.5 9.9 36 20.2 56.9 17.1 34.8 42.5 58.9 74.5 71 8.2 3.1 23.3 7.2 33.4 9 20.5 3.8 65.7 6.7 113.5 7.2 37.6.5 41.5.3 67.5-3.8 15.6-2.4 37.7-10.4 52.9-19.1 34.2-19.6 60.4-51.9 86.7-106.3 25.7-53.4 34.2-95.4 26.9-133-8-40.7-31.2-69.1-65-79.6-15.7-4.8-28.6-6.6-56.5-7.9-12.4-.5-27-1.7-32.5-2.5S325.4 31.1 318 30c-7.4-1.1-23.2-3.8-35-6-25.6-4.8-57.9-9.5-74.5-10.9-6.6-.6-25.5-1-42-1-24.2.1-32.3.5-41.9 2z"></path>
-      </svg>
-      </div>
+  <body>
     <div id="graph"></div>
-  </div>
-  
-  
-  <script src="leader-line.min.js"></script>
-  <script>
+
+    <script src="leader-line.min.js"></script>
+    <script>
       async function makeRequest(id) {
         let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
 
-        if (response.ok) { 
+        if (response.ok) {
           let json = await response.json();
           console.log(json);
           return json;
@@ -111,64 +25,68 @@
       }
 
       function getLocation(location) {
-        switch(location) {
-          case 0: return 'down';
-          case 2: return 'right';
-          case 3: return 'top';
-          default: return null;
+        switch (location) {
+          case 0:
+            return "down";
+          case 2:
+            return "right";
+          case 3:
+            return "top";
+          default:
+            return null;
         }
       }
 
-    // const nodes = [
-    //   { id: 1, parent: null, location: null },
-    //   { id: 2, parent: 1, location: 'right' },
-    //   { id: 3, parent: 2, location: 'down' },
-    //   { id: 4, parent: 3, location: 'right' },
-    //   { id: 5, parent: 3, location: 'down' },
-    // ];
+      // const nodes = [
+      //   { id: 1, parent: null, location: null },
+      //   { id: 2, parent: 1, location: 'right' },
+      //   { id: 3, parent: 2, location: 'down' },
+      //   { id: 4, parent: 3, location: 'right' },
+      //   { id: 5, parent: 3, location: 'down' },
+      // ];
 
-    const nodes = [];
-    let linkcs = [];
-    let data = null;
-    
-    (async ()=> {
-      data = await makeRequest(1);
+      const nodes = [];
+      let linkcs = [];
+      let data = null;
 
-      data.forEach(item => {
-        let node = {};
+      (async () => {
+        data = await makeRequest(1);
 
-        node.id = item.id;
-        node.parent = item.parentPostId;
-        node.location = getLocation(item.positiion);
-        node.title = item.title;
-        node.description = item.description;
+        data.forEach((item) => {
+          let node = {};
 
-        nodes.push(node);
-      });
-      //------------------------//
-      const nodeMap = nodes.reduce((acc, node) => {
-        acc[node.id] = node;
-        node.children = [];
-        return acc;
-      }, {});
+          node.id = item.id;
+          node.parent = item.parentPostId;
+          node.location = getLocation(item.positiion);
+          node.title = item.title;
+          node.description = item.description;
 
-      nodes.forEach((node) => {
-        if (node.parent) {
-          nodeMap[node.parent].children.push(node);
-        }
-      });
+          nodes.push(node);
+        });
+        //------------------------//
+        const nodeMap = nodes.reduce((acc, node) => {
+          acc[node.id] = node;
+          node.children = [];
+          return acc;
+        }, {});
 
-      const nodeSize = 200;
-      const nodeSpacing = 400;
-      const graph = document.getElementById('graph');
+        nodes.forEach((node) => {
+          if (node.parent) {
+            nodeMap[node.parent].children.push(node);
+          }
+        });
 
-      function drawNode(x, y, node) {
-        let div = document.createElement('div');
-        div.className = 'node';
-        div.id = `nodeId${node.id}`;
-        div.style.left = x - nodeSize / 2 + 'px';
-        div.style.top = y - nodeSize / 2 + 'px';
-        div.innerHTML = `
+        const nodeSize = 200;
+        const nodeSpacing = 400;
+        const graph = document.getElementById("graph");
+
+        function drawNode(x, y, node) {
+          let div = document.createElement("div");
+          div.className = "node";
+          div.id = `nodeId${node.id}`;
+          div.style.left = x - nodeSize / 2 + "px";
+          div.style.top = y - nodeSize / 2 + "px";
+          div.innerHTML = `
           <div class="title">${node.title}</div>
           <div class="content">${node.description}</div>
           <svg class="overlay" xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 512 403">
@@ -184,76 +102,72 @@
             />
           </svg>
           `;
-        graph.appendChild(div);
+          graph.appendChild(div);
 
-        const childrenLocations = {
-          down: { dx: 0, dy: 1 },
-          right: { dx: 1, dy: 0 },
-          top: { dx: 0, dy: -1 },
-          left: { dx: -1, dy: 0 },
-        };
-
-        node.children.forEach((child) => {
-          const location = childrenLocations[child.location] || {
-            dx: 0,
-            dy: 0,
+          const childrenLocations = {
+            down: { dx: 0, dy: 1 },
+            right: { dx: 1, dy: 0 },
+            top: { dx: 0, dy: -1 },
+            left: { dx: -1, dy: 0 },
           };
-          const childX = x + location.dx * nodeSpacing;
-          const childY = y + location.dy * nodeSpacing;
 
-          let line = document.createElement('div');
-          line.className = 'line';
-          line.style.left = x + 'px';
-          line.style.top = y + 'px';
+          // {right: [{}]}
 
-          let length = Math.sqrt(
-            Math.pow(nodeSpacing * location.dx, 2) +
-            Math.pow(nodeSpacing * location.dy, 2),
-          );
-          let angle = (Math.atan2(location.dy, location.dx) * 180) / Math.PI;
-          line.style.width = length + 'px';
-          line.style.transform = `rotate(${angle}deg)`;
-          // graph.appendChild(line);
+          // const right = node.children.filter(
+          //   (item) => item.location === "right"
+          // );
+          // const top = node.children.filter((item) => item.location === "right");
+          // const down = node.children.filter(
+          //   (item) => item.location === "right"
+          // );
 
-          drawNode(childX, childY, child);
-        });
-      }
+          node.children.forEach((child) => {
+            const location = childrenLocations[child.location] || {
+              dx: 0,
+              dy: 0,
+            };
+            const childX = x + location.dx * nodeSpacing;
+            const childY = y + location.dy * nodeSpacing;
+            // if (right.lenght > 2) { startX: 100, startY: 150}
 
-      const rootNode = nodes.find((node) => node.parent === null);
-      drawNode(100, 100, rootNode);
+            // 2. { startX: 100 + , startY: 150 + height + gap}
 
-      console.log(nodes)
-      nodes.forEach(elem => {
-        if(elem.parent) {
-          new LeaderLine(
-            document.getElementById(`nodeId${elem.parent}`),
-            document.getElementById(`nodeId${elem.id}`),
-            {
-              color: 'white', 
-              size: 4, 
-              endPlug: 'arrow1',
-            }
-          );
+            let line = document.createElement("div");
+            line.className = "line";
+            line.style.left = x + "px";
+            line.style.top = y + "px";
+
+            let length = Math.sqrt(
+              Math.pow(nodeSpacing * location.dx, 2) +
+                Math.pow(nodeSpacing * location.dy, 2)
+            );
+            let angle = (Math.atan2(location.dy, location.dx) * 180) / Math.PI;
+            line.style.width = length + "px";
+            line.style.transform = `rotate(${angle}deg)`;
+            // graph.appendChild(line);
+
+            drawNode(childX, childY, child);
+          });
         }
-      });
 
-     const startLinck = nodes.find(elem => elem.parent === null);
+        const rootNode = nodes.find((node) => node.parent === null);
+        drawNode(100, 100, rootNode);
 
-     if(startLinck) {
-      new LeaderLine(
-            document.getElementById(`start`),
-            document.getElementById(`nodeId${startLinck.id}`),
-            {
-              color: 'white', 
-              size: 4, 
-              endPlug: 'arrow1',
-            }
-          );
-     }
-
-
-    })();
-  </script>
-</body>
-
+        console.log(nodes);
+        nodes.forEach((elem) => {
+          if (elem.parent) {
+            new LeaderLine(
+              document.getElementById(`nodeId${elem.parent}`),
+              document.getElementById(`nodeId${elem.id}`),
+              {
+                color: "white",
+                size: 4,
+                endPlug: "arrow1",
+              }
+            );
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
