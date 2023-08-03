@@ -200,16 +200,20 @@
 
         console.log(nodes);
         nodes.forEach((elem) => {
-          if (elem.parent) {
-            new LeaderLine(
-              document.getElementById(`nodeId${elem.parent}`),
-              document.getElementById(`nodeId${elem.id}`),
-              {
-                color: "white",
-                size: 4,
-                endPlug: "arrow1",
-              }
-            );
+          if (elem.parent !== null) {
+            const start = document.querySelector(`#nodeId${elem.parent}`);
+            const end = document.querySelector(`#nodeId${elem.id}`);
+           if(start && end) {
+              new LeaderLine(
+                start,
+                end,
+                {
+                  color: "white",
+                  size: 4,
+                  endPlug: "arrow1",
+                }
+              );
+           }
           }
         });
 
