@@ -17,8 +17,8 @@
     <script src="leader-line.min.js"></script>
     <script>
       async function makeRequest(id) {
-        let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
-        // let response = await fetch(`http://localhost:3004/nodes`);
+        // let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
+        let response = await fetch(`http://localhost:3000/nodes`);
 
         if (response.ok) {
           let json = await response.json();
@@ -124,8 +124,6 @@
           <div class="title">${node.title}</div>
           <div class="content">${node.description}</div>
           </div>
-          
-          
           `;
           graph.appendChild(div);
 
@@ -141,58 +139,33 @@
           );
           const isRadialLayout = childrenRight.length > 1;
 
-          if (isRadialLayout) {
-            // Calculate the angle between each right child node
-            const angleStep = Math.PI / (childrenRight.length + 3);
-            let angleOffset = -Math.PI * 2; // Starting angle at 0 degrees (90 degrees counter-clockwise)
+          // Calculate the angle between each right child node
+          const angleStep = Math.PI / (childrenRight.length + 2);
+          let angleOffset = -Math.PI / 6;
+          let count = 0;
 
-            childrenRight.forEach((child) => {
-              const childX = x + Math.cos(angleOffset) * nodeSpacing;
+          node.children.forEach((child) => {
+            if (isRadialLayout) {
+              const offset = count > 0 ? 1.5 : 1.8;
+              const childX = x + Math.cos(angleOffset) * (nodeSpacing * offset);
               const childY = y + Math.sin(angleOffset) * nodeSpacing;
-
-              let line = document.createElement("div");
-              line.className = "line";
-              line.style.left = x + "px";
-              line.style.top = y + "px";
-
-              let length = nodeSpacing;
-              let angle = (angleOffset * 180) / Math.PI;
-              line.style.width = length + "px";
-              line.style.transform = `rotate(${angle}deg)`;
-              // graph.appendChild(line);
-
               drawNode(childX, childY, child);
 
               // Increment the angle for the next child
               angleOffset += angleStep;
-            });
-          } else {
-            let count = 0;
-            node.children.forEach((child) => {
+              count += 1;
+            } else {
               const location = childrenLocations[child.location] || {
                 dx: 0,
                 dy: 0,
               };
+
               let childX = x + location.dx * nodeSpacing;
               let childY = y + location.dy * nodeSpacing;
 
-              let line = document.createElement("div");
-              line.className = "line";
-              line.style.left = x + "px";
-              line.style.top = y + "px";
-
-              let length = Math.sqrt(
-                Math.pow(nodeSpacing * location.dx, 2) +
-                  Math.pow(nodeSpacing * location.dy, 2)
-              );
-              let angle =
-                (Math.atan2(location.dy, location.dx) * 180) / Math.PI;
-              line.style.width = length + "px";
-              line.style.transform = `rotate(${angle}deg)`;
-              // graph.appendChild(line);
               drawNode(childX, childY, child);
-            });
-          }
+            }
+          });
         }
 
         const rootNode = nodes.find((node) => node.parent === null);
@@ -203,17 +176,13 @@
           if (elem.parent !== null) {
             const start = document.querySelector(`#nodeId${elem.parent}`);
             const end = document.querySelector(`#nodeId${elem.id}`);
-           if(start && end) {
-              new LeaderLine(
-                start,
-                end,
-                {
-                  color: "white",
-                  size: 4,
-                  endPlug: "arrow1",
-                }
-              );
-           }
+            if (start && end) {
+              new LeaderLine(start, end, {
+                color: "white",
+                size: 4,
+                endPlug: "arrow1",
+              });
+            }
           }
         });
 
