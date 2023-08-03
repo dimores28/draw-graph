@@ -24,7 +24,7 @@
     <script>
       async function makeRequest(id) {
         let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
-        // let response = await fetch(`http://localhost:3000/nodes`);
+        // let response = await fetch(`http://localhost:3004/nodes`);
 
         if (response.ok) {
           let json = await response.json();
@@ -76,6 +76,7 @@
 
       (async () => {
         data = await makeRequest(1);
+        const ctorage = JSON.parse(localStorage.getItem('nodes'));
 
         data.forEach((item) => {
           let node = {};
@@ -86,6 +87,11 @@
           node.title = item.title;
           node.description = item.description;
           node.postType = item.postType;
+
+          if(ctorage) {
+            const newNode = ctorage.find(elem => elem.id === node.id);
+            if(!newNode) { node.newNode = true; }
+          }
 
           nodes.push(node);
         });
@@ -112,6 +118,11 @@
           div.id = `nodeId${node.id}`;
           div.style.left = x - nodeSize / 2 + "px";
           div.style.top = y - nodeSize / 2 + "px";
+          if(node.newNode) {
+            div.classList.add('animate');
+            node.newNode = false;
+          }
+
           div.innerHTML = `
           <div class="title">${node.title}</div>
           <div class="content">${node.description}</div>
@@ -194,18 +205,20 @@
           }
         });
 
-
         if(rootNode) {
           new LeaderLine(
-          document.getElementById('startNode'),
-          document.getElementById(`nodeId${rootNode.id}`),
-          {
-            color: "white",
-            size: 4,
-            endPlug: "arrow1",
-          }
-        );
+            document.getElementById('startNode'),
+            document.getElementById(`nodeId${rootNode.id}`),
+            {
+              color: "white",
+              size: 4,
+              endPlug: "arrow1",
+            }
+          );
         }
+
+
+        localStorage.setItem('nodes', JSON.stringify(nodes));
       })();
     </script>
   </body>
