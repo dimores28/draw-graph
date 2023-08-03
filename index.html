@@ -145,8 +145,8 @@
           let count = 0;
 
           node.children.forEach((child) => {
-            if (isRadialLayout) {
-              const offset = count > 0 ? 1.5 : 1.8;
+            if (isRadialLayout && child.location === "right") {
+              const offset = count > 0 ? 1.5 : 2;
               const childX = x + Math.cos(angleOffset) * (nodeSpacing * offset);
               const childY = y + Math.sin(angleOffset) * nodeSpacing;
               drawNode(childX, childY, child);
