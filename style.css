@@ -21,8 +21,8 @@ html {
   justify-content: center;
   width: 200px;
   height: 200px;
-  border-radius: 50%;
-  line-height: 40px;
+  /* border-radius: 50%; */
+  /* line-height: 40px; */
   text-align: center;
 }
 
@@ -47,6 +47,7 @@ html {
   font-weight: 500;
   font-family: Caladea, sans-serif;
   color: #2f3b69;
+  margin-bottom: 10px;
 }
 
 .content {
