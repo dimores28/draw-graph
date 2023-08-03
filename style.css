@@ -83,3 +83,24 @@ html {
     opacity: 1;
   }
 }
+
+.node-wrap {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.node-title {
+  font-size: 32px;
+  font-weight: 500;
+  font-family: Caladea, sans-serif;
+  color: #2f3b69;
+  margin-bottom: 10px;
+}
+
+.node-content {
+  color: #2f3b69;
+  font-family: Garet;
+  font-size: 21px;
+  font-weight: 400;
+}
