@@ -20,8 +20,8 @@
     <script src="leader-line.min.js"></script>
     <script>
       async function makeRequest(id) {
-        let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
-        // let response = await fetch(`http://localhost:3000/nodes`);
+        // let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
+        let response = await fetch(`http://localhost:3004/nodes`);
 
         if (response.ok) {
           let json = await response.json();
