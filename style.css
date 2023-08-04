@@ -56,6 +56,12 @@ html {
   align-items: center;
 }
 
+.start-node .content {
+  font-family: 'DO-AllCaps Slanted', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
 .line {
   position: absolute;
   transform-origin: top left;
