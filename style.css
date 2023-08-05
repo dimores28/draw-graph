@@ -11,14 +11,14 @@ body {
 }
 
 .wrapper {
-  max-width: 1300px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 50px 20px;
   overflow: hidden;
 }
 
 #graph {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .node {
@@ -62,6 +62,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.start-node .content {
+  font-family: 'DO-AllCaps Slanted', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .line {
