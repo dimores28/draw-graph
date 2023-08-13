@@ -9,22 +9,6 @@
         "parentPostId": 2
       },
       {
-        "id": 4,
-        "title": "#4",
-        "description": "#4 Description",
-        "postType": 0,
-        "positiion": 2,
-        "parentPostId": 2
-      },
-      {
-        "id": 5,
-        "title": "#5",
-        "description": "#5 Description",
-        "postType": 0,
-        "positiion": 0,
-        "parentPostId": 1
-      },
-      {
         "id": 2,
         "title": "#2",
         "description": "#2 Description",
@@ -39,39 +23,6 @@
         "postType": 2,
         "positiion": 0,
         "parentPostId": null
-      },
-      {
-         "id": 6,
-         "title": "#6",
-         "description": "#6 Description",
-         "postType": 0,
-         "positiion": 2,
-         "parentPostId": 2
-       },
-       {
-          "id": 8,
-          "title": "#8",
-          "description": "#8 Description",
-          "postType": 1,
-          "positiion": 2,
-          "parentPostId": 3
-        },
-       {
-          "id": 11,
-          "title": "#11",
-          "description": "#11 Description",
-          "postType": 1,
-          "positiion": 2,
-          "parentPostId": 3
-        }
-        ,
-       {
-          "id": 13,
-          "title": "#13",
-          "description": "#12 Description",
-          "postType": 1,
-          "positiion": 2,
-          "parentPostId": 6
-        }
-      ]
+      }
+    ]
 }

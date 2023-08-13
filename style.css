@@ -10,6 +10,17 @@ body {
   background-color: #0a2e5e;
 }
 
+a {
+  text-decoration: none;
+  color: #0a2e5e;
+  font-family: 'DO-AllCaps Slanted', sans-serif;
+  transition: all 0.3s ease-in;
+}
+
+a:hover {
+  color: #0a2e5e80;
+}
+
 .wrapper {
   max-width: 1800px;
   margin: 0 auto;
