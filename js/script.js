@@ -1,6 +1,6 @@
 async function makeRequest(id) {
    // let response = await fetch(`http://207.180.192.253/api/Posts/${id}`);
-   let response = await fetch(`http://localhost:3000/nodes`);
+   let response = await fetch(`http://localhost:3001/nodes`);
 
    if (response.ok) {
      let json = await response.json();
@@ -172,6 +172,25 @@ function getColor(postType) {
 
 
 function onTelegramAuth(user) {
+
+   const headers = {
+      'Content-Type': 'application/json'
+   };
+    
+
+   fetch(`http://207.180.192.253/api/Posts/`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Помилка:', error);
+    });
+
    if (user.id) {
       console.log("Telegram user data",user);
       const body = document.querySelector("body");
